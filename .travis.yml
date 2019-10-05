@@ -1,0 +1,8 @@
+services:
+  - docker
+
+script:
+  - export IMAGE="${DOCKER_LOGIN}/docker-with-make"
+  - export IMAGE_TAG_TS="${IMAGE}:$(date '+%Y%m%d-%H%M%S')"
+  - export IMAGE_TAG_LATEST="${IMAGE}:latest"
+  - docker build -t "${IMAGE_TAG_TS}" . && docker tag "${IMAGE_TAG_TS}" "${IMAGE_TAG_LATEST}" && echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_LOGIN}" --password-stdin && docker push "${IMAGE_TAG_TS}" && docker push "${IMAGE_TAG_LATEST}"
