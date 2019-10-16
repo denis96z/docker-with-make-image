@@ -1,2 +1,3 @@
 FROM docker:latest
-RUN apk add git make sshpass rsync
+RUN apk add git make rsync
+RUN apk add --update --no-cache openssh sshpass
